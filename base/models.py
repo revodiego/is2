@@ -32,4 +32,38 @@ class Proyecto(models.Model):
         blank=True,
         null=True,
         related_name='proyectos_testeados')
+        
+class LineaBase(models.Model):
+    ESTADO_PENDIENTE = 'PE'
+    ESTADO_EN_PROCESO = 'EP'
+    ESTADO_FINALIZADO = 'FI'
+    ESTADOS = (
+        (ESTADO_PENDIENTE, 'Pendiente'),
+        (ESTADO_EN_PROCESO, 'En proceso'),
+        (ESTADO_FINALIZADO, 'Finalizado'),
+        )
+    nombre = models.CharField(max_length=255)
+    estado = models.CharField(max_length=2, choices=ESTADOS, default=ESTADO_PENDIENTE)
+    proyecto = models.ForeignKey(
+        'base.Proyecto',
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+        related_name='lineas_base')
+        
+class Item(models.Model):
+    ESTADO_PENDIENTE = 'PE'
+    ESTADO_EN_PROCESO = 'EP'
+    ESTADO_FINALIZADO = 'FI'
+    ESTADOS = (
+        (ESTADO_PENDIENTE, 'Pendiente'),
+        (ESTADO_EN_PROCESO, 'En proceso'),
+        (ESTADO_FINALIZADO, 'Finalizado'),
+        )
+    nombre = models.CharField(max_length=255)
+    estado = models.CharField(max_length=2, choices=ESTADOS, default=ESTADO_PENDIENTE)
+    lineaBase = models.ForeignKey(
+        'base.LineaBase',
+        on_delete=models.PROTECT,
+        related_name='items')
     
