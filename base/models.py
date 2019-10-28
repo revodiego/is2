@@ -32,6 +32,9 @@ class Proyecto(models.Model):
         blank=True,
         null=True,
         related_name='proyectos_testeados')
+
+    def __str__(self):
+        return '{} - {}'.format(self.id, self.nombre)
         
 class LineaBase(models.Model):
     ESTADO_PENDIENTE = 'PE'
@@ -50,6 +53,9 @@ class LineaBase(models.Model):
         blank=True,
         null=True,
         related_name='lineas_base')
+
+    def __str__(self):
+        return '{} - {}'.format(self.id, self.nombre)
         
 class Item(models.Model):
     ESTADO_PENDIENTE = 'PE'
@@ -66,4 +72,7 @@ class Item(models.Model):
         'base.LineaBase',
         on_delete=models.PROTECT,
         related_name='items')
+
+    def __str__(self):
+        return '{} - {}'.format(self.id, self.nombre)
     
