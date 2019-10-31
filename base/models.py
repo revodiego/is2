@@ -35,7 +35,8 @@ class Proyecto(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.id, self.nombre)
-        
+
+
 class LineaBase(models.Model):
     ESTADO_PENDIENTE = 'PE'
     ESTADO_EN_PROCESO = 'EP'
@@ -56,7 +57,8 @@ class LineaBase(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.id, self.nombre)
-        
+
+
 class Item(models.Model):
     ESTADO_PENDIENTE = 'PE'
     ESTADO_EN_PROCESO = 'EP'
@@ -75,4 +77,3 @@ class Item(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.id, self.nombre)
-    
