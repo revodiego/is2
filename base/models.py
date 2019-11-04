@@ -78,6 +78,7 @@ class Item(models.Model):
     ESTADO_PENDIENTE = 'PE'
     ESTADO_EN_PROCESO = 'EP'
     ESTADO_FINALIZADO = 'FI'
+    
     ESTADOS = (
         (ESTADO_PENDIENTE, 'Pendiente'),
         (ESTADO_EN_PROCESO, 'En proceso'),
@@ -89,6 +90,10 @@ class Item(models.Model):
         'base.LineaBase',
         on_delete=models.PROTECT,
         related_name='items')
+
+    class Meta:
+        verbose_name = ''
+        verbose_name_plural = ''
 
     def __str__(self):
         return '{} - {}'.format(self.id, self.nombre)
