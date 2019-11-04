@@ -119,30 +119,34 @@ class Command(BaseCommand):
             ('configuracion', 'lineabaseproxy', 'delete_lineabaseproxy'),
             ('configuracion', 'lineabaseproxy', 'view_lineabaseproxy'),
 
-            ('configuracion', 'itemproxy', 'add_itemproxy'),
-            ('configuracion', 'itemproxy', 'change_itemproxy'),
-            ('configuracion', 'itemproxy', 'delete_itemproxy'),
-            ('configuracion', 'itemproxy', 'view_itemproxy'),
+            ('desarrollo', 'itemproxy', 'add_itemproxy'),
+            ('desarrollo', 'itemproxy', 'change_itemproxy'),
+            ('desarrollo', 'itemproxy', 'delete_itemproxy'),
+            ('desarrollo', 'itemproxy', 'view_itemproxy'),
         ]
         plider = [
             ('administracion', 'proyectoproxy', 'change_proyectoproxy'),
             ('administracion', 'proyectoproxy', 'view_proyectoproxy'),
 
+            ('configuracion', 'lineabaseproxy', 'add_lineabaseproxy'),
             ('configuracion', 'lineabaseproxy', 'change_lineabaseproxy'),
             ('configuracion', 'lineabaseproxy', 'view_lineabaseproxy'),
 
-            ('configuracion', 'itemproxy', 'change_itemproxy'),
-            ('configuracion', 'itemproxy', 'view_itemproxy'),
+            ('desarrollo', 'itemproxy', 'add_itemproxy'),
+            ('desarrollo', 'itemproxy', 'change_itemproxy'),
+            ('desarrollo', 'itemproxy', 'view_itemproxy'),
         ]
         pprogramador = [
             ('administracion', 'proyectoproxy', 'view_proyectoproxy'),
             ('configuracion', 'lineabaseproxy', 'view_lineabaseproxy'),
-            ('configuracion', 'itemproxy', 'view_itemproxy'),
+            ('desarrollo', 'itemproxy', 'view_itemproxy'),
+            ('desarrollo', 'itemproxy', 'change_itemproxy'),
         ]
         ptester = [
             ('administracion', 'proyectoproxy', 'view_proyectoproxy'),
             ('configuracion', 'lineabaseproxy', 'view_lineabaseproxy'),
-            ('configuracion', 'itemproxy', 'view_itemproxy'),
+            ('desarrollo', 'itemproxy', 'view_itemproxy'),
+            ('desarrollo', 'itemproxy', 'change_itemproxy'),
         ]
         for permiso in Permission.objects.all():
             logger.info('permiso {} => {}'.format(permiso, permiso.codename))

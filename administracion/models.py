@@ -1,10 +1,10 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, UserManager
 from django.db import models
 
 from base.models import Proyecto
 
 
-class UserProxyManager(models.Manager):
+class UserProxyManager(UserManager):
 
     def get_queryset(self):
         return super(UserProxyManager, self).get_queryset().filter(is_superuser=False)

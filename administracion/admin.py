@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from administracion.models import UserProxy, ProyectoProxy
+from configuracion.models import LineaBaseProxy
 
 
 class UserProxyAdmin(admin.ModelAdmin):
@@ -14,9 +15,15 @@ class UserProxyAdmin(admin.ModelAdmin):
         obj.is_staff = True
         obj.save()
 
+class LineaBaseProxyInline(admin.TabularInline):
+    model = LineaBaseProxy
+
 
 class ProyectoProxyAdmin(admin.ModelAdmin):
     list_display = ['id', 'nombre', 'estado', 'lider', 'programador', 'tester']
+    inlines = [
+        LineaBaseProxyInline,
+    ]
 
     def get_queryset(self, request):
 
@@ -39,7 +46,7 @@ class ProyectoProxyAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
 
         if request.user.groups.filter(name='Lider').exists():
-            return ['lider', ]
+            return ['lider', 'nombre', 'estado', 'programador', 'tester']
 
         return []
 

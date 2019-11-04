@@ -14,6 +14,21 @@ class Proyecto(models.Model):
         )
     nombre = models.CharField(max_length=255)
     estado = models.CharField(max_length=2, choices=ESTADOS, default=ESTADO_PENDIENTE)
+    FASE_1 = 'F1'
+    FASE_2 = 'F2'
+    FASE_3 = 'F3'
+    FASE_4 = 'F4'
+    FASE_5 = 'F5'
+    
+    FASES = (
+        (FASE_1, 'Analisis'),
+        (FASE_2, 'Diseno'),
+        (FASE_3, 'Generacion de codigo'),
+        (FASE_4, 'Prueba'),
+        (FASE_5, 'Mantenimiento'),
+        )
+    fase = models.CharField(max_length=2, choices=FASES, default=FASE_1)
+
     lider = models.ForeignKey(
         'auth.User',
         on_delete=models.PROTECT,

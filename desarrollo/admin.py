@@ -1,23 +1,21 @@
 from django.contrib import admin
-
-from administracion.models import ProyectoProxy
-from configuracion.models import LineaBaseProxy
 from desarrollo.models import ItemProxy
-
-class ItemProxyInline(admin.TabularInline):
-    model = ItemProxy
+from administracion.models import ProyectoProxy
 
 
-class LineaBaseProxyAdmin(admin.ModelAdmin):
-    list_display = ['id', 'get_proyecto_nombre', 'nombre', 'estado']
-    inlines = [
-        ItemProxyInline,
-    ]
+
+class ItemProxyAdmin(admin.ModelAdmin):
+    list_display = ['id', 'get_proyecto_nombre', 'get_lineaBase_nombre', 'nombre', 'estado']
 
     def get_proyecto_nombre(self, obj):
-        return obj.proyecto.nombre
+        return obj.lineaBase.proyecto.nombre
 
     get_proyecto_nombre.short_description = 'Proyecto'
+
+    def get_lineaBase_nombre(self, obj):
+        return obj.lineaBase.nombre
+
+    get_lineaBase_nombre.short_description = 'Linea Base'
 
     def get_queryset(self, request):
 
@@ -35,7 +33,15 @@ class LineaBaseProxyAdmin(admin.ModelAdmin):
         if request.user.groups.filter(name='Tester').exists():
             queryset = queryset | request.user.proyectos_testeados.all()
 
-        return LineaBaseProxy.objects.filter(proyecto__in=queryset.distinct())
+        return ItemProxy.objects.filter(lineaBase__proyecto__in=queryset.distinct())
 
 
-admin.site.register(LineaBaseProxy, LineaBaseProxyAdmin)
+    def get_readonly_fields(self, request, obj=None):
+
+        if request.user.groups.filter(name__in=['Programador', 'Tester']).exists():
+            return ['nombre', 'lineaBase']   
+
+        return []
+
+
+admin.site.register(ItemProxy, ItemProxyAdmin)
