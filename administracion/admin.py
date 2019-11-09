@@ -17,6 +17,7 @@ class UserProxyAdmin(admin.ModelAdmin):
 
 class LineaBaseProxyInline(admin.TabularInline):
     model = LineaBaseProxy
+    show_change_link = True
 
 
 class ProyectoProxyAdmin(admin.ModelAdmin):

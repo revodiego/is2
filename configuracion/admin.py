@@ -6,6 +6,7 @@ from desarrollo.models import ItemProxy
 
 class ItemProxyInline(admin.TabularInline):
     model = ItemProxy
+    show_change_link = True
 
 
 class LineaBaseProxyAdmin(admin.ModelAdmin):
