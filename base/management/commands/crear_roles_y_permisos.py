@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Creamos los grupos
-        staff_g, _ = Group.objects.get_or_create(name='Staff')
+        staff_g, _ = Group.objects.get_or_create(name='Administrador')
         lider_g, _ = Group.objects.get_or_create(name='Lider')
         programador_g, _ = Group.objects.get_or_create(name='Programador')
         tester_g, _ = Group.objects.get_or_create(name='Tester')
@@ -31,19 +31,19 @@ class Command(BaseCommand):
             admin_u = User.objects.get(username='admin')
             logger.info('Admin existente')
 
-        if not User.objects.filter(username='staff').exists():
+        if not User.objects.filter(username='administrador').exists():
             staff_u = User.objects.create_user(
-                username='staff',
-                email='staff@a.com',
-                password='staff',
+                username='administrador',
+                email='administrador@a.com',
+                password='administrador',
                 is_staff=True,
                 first_name='Sergio',
                 last_name='Salazar'
             )
-            logger.info('Staff creado')
+            logger.info('administrador creado')
         else:
-            staff_u = User.objects.get(username='staff')
-            logger.info('Staff existente')
+            staff_u = User.objects.get(username='administrador')
+            logger.info('administrador existente')
 
         if not User.objects.filter(username='lider').exists():
             lider_u = User.objects.create_user(
@@ -91,7 +91,7 @@ class Command(BaseCommand):
         staff_g.user_set.add(admin_u)
         staff_g.user_set.add(staff_u)
         staff_g.save()
-        logger.info('Agregado usuarios al grupo Staff')
+        logger.info('Agregado usuarios al grupo administrador')
         lider_g.user_set.add(lider_u)
         lider_g.save()
         logger.info('Agregado usuario al grupo Lider')
@@ -123,6 +123,8 @@ class Command(BaseCommand):
             ('desarrollo', 'itemproxy', 'change_itemproxy'),
             ('desarrollo', 'itemproxy', 'delete_itemproxy'),
             ('desarrollo', 'itemproxy', 'view_itemproxy'),
+
+            ('reportes', 'itemreportesproxy', 'view_itemreportesproxy'),
         ]
         plider = [
             ('administracion', 'proyectoproxy', 'change_proyectoproxy'),

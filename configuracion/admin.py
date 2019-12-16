@@ -24,7 +24,7 @@ class LineaBaseProxyAdmin(admin.ModelAdmin):
 
         queryset = ProyectoProxy.objects.none()
 
-        if request.user.groups.filter(name='Staff').exists():
+        if request.user.groups.filter(name='Administrador').exists():
             queryset = queryset | ProyectoProxy.objects.all()
 
         if request.user.groups.filter(name='Lider').exists():
